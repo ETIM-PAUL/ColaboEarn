@@ -12,7 +12,7 @@ import { base, baseSepolia } from "viem/chains";
 import { useNavigate } from "react-router-dom";
 import { abi, contractAddress } from "./utils";
 import { PostsContext } from "../context/PostsContext";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { useActiveAccount } from "thirdweb/react";
 const categories = [
   "Tech", "Finance", "Art", "Culture", "Web3", "Gaming", "Education",
@@ -32,6 +32,7 @@ const CreateThemePage = () => {
   const [description, setDescription] = useState("");
   const [creatingTheme, setCreatingTheme] = useState(false);
   const activeAccount = useActiveAccount()
+  const { setAllThemes } = useContext(PostsContext);
   const navigate = useNavigate()
 
   
@@ -47,6 +48,51 @@ const CreateThemePage = () => {
       const reader = new FileReader();
       reader.onload = () => setBanner(reader.result);
       reader.readAsDataURL(file);
+    }
+  };
+
+  async function getThemeInfo(link) {
+    const url = link;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  }
+
+  const getAllThemes = async () => {
+    try {
+      // Initialize provider and contract
+      const provider = new ethers.providers.JsonRpcProvider(import.meta.env.VITE_RPC_URL);
+      const contract = new ethers.Contract(contractAddress, abi, provider);
+
+      // Call the getAllThemes function
+      const allThemes = await contract.getAllThemes();
+
+      // Map each theme to a promise that resolves to the formatted object
+      const formattedThemes = await Promise.all(
+        allThemes.map(async (element) => {
+          const res = await getThemeInfo(element?.ipfsUrl);
+          return {
+            id: BigNumber.from(element?.id._hex).toString(),
+            nftImg: res?.image,
+            theme: res?.theme,
+            description: res?.description,
+            amount: BigNumber.from(element?.tips._hex).toString(),
+            creator: element?.creator,
+            category: res?.category,
+            type: element?.contentType,
+            collaborators: BigNumber.from(element?.collaborators._hex).toString(),
+            maxCollaborators: BigNumber.from(element?.maxCollaborators._hex).toString(),
+            date: BigNumber.from(element?.dateCreated._hex).toString(),
+          };
+        })
+      );
+
+      setAllThemes(formattedThemes);
+      return formattedThemes;
+
+    } catch (error) {
+      console.error('Error fetching coin addresses:', error);
+      throw error;
     }
   };
 
@@ -125,9 +171,13 @@ const CreateThemePage = () => {
         const cid = response.data.IpfsHash;
         const contentUrl = `https://ipfs.io/ipfs/${cid}`;
 
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+
         // Interact with contract here
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
+
+        console.log("signer", signer)
         const contract = new ethers.Contract(contractAddress, abi, signer);
 
         const tx = await contract.createTheme(
@@ -137,6 +187,7 @@ const CreateThemePage = () => {
         );
         await tx.wait();
         toast.success("Theme created on-chain!");
+        getAllThemes();
         navigate("/themes")
         setCreatingTheme(false);
 

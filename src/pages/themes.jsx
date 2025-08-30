@@ -37,7 +37,7 @@ const Themes = () => {
                         <div className="w-full text-sm flex justify-between items-center">
                             <span className="font-bold text-gray-900">Themes (ArtWorks, Words, Clips)</span>
                             
-                            {activeAccount?.address.toLowerCase() === "0x097753B3EF40ca0676B8d95f59303AcC5f3f42cF".toLowerCase() &&
+                            {activeAccount?.address.toLowerCase() === "0x9d4eF81F5225107049ba08F69F598D97B31ea644".toLowerCase() &&
                             <div onClick={() => navigate("/create_theme")} className="w-full flex justify-end">
                                 <button className="w-fit flex items-center gap-2 cursor-pointer text-center bg-[#9e74eb] hover:opacity-90 text-white px-6 py-3 rounded-xl transition duration-300 shadow-md">
                                 <span className="text-sm">Create New Theme</span>
@@ -49,7 +49,7 @@ const Themes = () => {
                         </div>
 
 
-                    {(loading && forYouPosts.length === 0) && (
+                    {(loading && themes.length === 0) && (
                         // Show skeleton loader while loading
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-3">
                         {[...Array(4)].map((_, index) => (
@@ -62,7 +62,7 @@ const Themes = () => {
                         </div>
                         )}
 
-                        {(forYouPosts.length > 0 && !loading) && (
+                        {(themes.length > 0 && !loading) && (
                         // Show filtered coin details
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-3">
                         {themes.map((theme, index) => (
@@ -83,10 +83,10 @@ const Themes = () => {
                         </div>
                         )}
 
-                        {(forYouPosts.length === 0 && !loading) && (
-                        // Show "No Posts yet" if there are no matching posts
+                        {(themes.length === 0 && !loading) && (
+                        // Show "No Theme yet" if there are no themes
                         <div className="flex justify-center items-center h-40">
-                        <p className="text-gray-500">No Posts yet</p>
+                        <p className="text-gray-500">No Themes yet</p>
                         </div>
                     )}
                     </section>

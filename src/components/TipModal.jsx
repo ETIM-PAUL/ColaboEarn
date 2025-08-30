@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { toast } from 'react-toastify';
 import { formatEther } from 'viem';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { abi, contractAddress } from './utils';
 import { PostsContext } from '../context/PostsContext';
 
@@ -89,7 +89,6 @@ const TipModal = ({post, isOpen, onClose, userCoinBalance }) => {
         throw error;
       }
   };
-
   
 
   return (
@@ -139,7 +138,7 @@ const TipModal = ({post, isOpen, onClose, userCoinBalance }) => {
                 </div>
 
                 <p className="text-sm mt-4 text-gray-500 mt-1">
-                Your balance: {userCoinBalance ? userCoinBalance : 0} {"XTZ"}
+                Your balance: {userCoinBalance ? userCoinBalance : 0} {"ETH"}
               </p>
 
                 <div className="mt-4 flex justify-end gap-2">

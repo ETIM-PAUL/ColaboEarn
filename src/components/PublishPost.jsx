@@ -12,7 +12,7 @@ import { base, baseSepolia } from "viem/chains";
 import { useNavigate } from "react-router-dom";
 import { abi, contractAddress } from "./utils";
 import { PostsContext } from "../context/PostsContext";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { useActiveAccount } from "thirdweb/react";
 import { BiCategory, BiVideoPlus } from "react-icons/bi";
 import { FaHashtag } from "react-icons/fa";
@@ -20,7 +20,6 @@ import { MdDescription, MdPeople } from "react-icons/md";
 
 
 const CreatePost = ({type, theme}) => {
-  const [promptRegister, setPromptRegister] = useState(false);
   const [title, setTitle] = useState("");
   const [banner, setBanner] = useState(null);
   const [category, setCategory] = useState(null);
@@ -34,7 +33,7 @@ const CreatePost = ({type, theme}) => {
   const activeAccount = useActiveAccount()
   const navigate = useNavigate()
 
-  const { themes, setAllContributions } = useContext(PostsContext);
+  const { themes, setAllContributions, getUpdatedContributions } = useContext(PostsContext);
 
   if (!activeAccount) {
     toast.error("Please connect your wallet");
@@ -46,41 +45,6 @@ const CreatePost = ({type, theme}) => {
     const response = await fetch(url);
     const data = await response.json();
     return data;
-  }
-  
-  const getAllContributions = async () => {
-    try {
-      // Initialize provider and contract
-      const provider = new ethers.providers.JsonRpcProvider(import.meta.env.VITE_RPC_URL);
-      const contract = new ethers.Contract(contractAddress, abi, provider);
-  
-      // Call the getAllCoins function
-      const allContributions = await contract.getAllContributions();
-
-      // Map each theme to a promise that resolves to the formatted object
-      const formattedContents = await Promise.all(
-        allContributions.map(async (element) => {
-          const res = await getThemeInfo(element?.ipfsLink);
-          return {
-            id: BigNumber.from(element?.id._hex).toNumber(),
-            nftImg: res?.image,
-            theme:  BigNumber.from(element?.themeId._hex).toString(),
-            type: themes.find((item) => item?.id === BigNumber.from(element?.themeId._hex).toString())?.type,
-            title: res?.name,
-            description: res?.description,
-            approved: element?.approved,
-            creator: element?.creator,
-            content:res?.content,
-            date: BigNumber.from(element?.dateCreated._hex).toString(),
-          };
-        })
-      );
-
-
-      setAllContributions(formattedContents);
-    } catch (error) {
-      console.log('error', error);
-    }
   }
   
   const handleImageChange = (e) => {
@@ -179,7 +143,7 @@ const CreatePost = ({type, theme}) => {
           contentUrl
         );
         await tx.wait();
-        getAllContributions();
+        getUpdatedContributions();
         toast.success("Contribution created and pending admin approval!");
         navigate("/collection")
         setPublishing(false);

@@ -18,14 +18,13 @@ import { useActiveAccount } from 'thirdweb/react';
 
 const BlogPostDetails = ({ post, theme }) => {
   const navigate = useNavigate();
-  const { forYouPosts } = useContext(PostsContext);
+  const { getUpdatedContributions, updateContributionStatus } = useContext(PostsContext);
   const activeAccount = useActiveAccount();
   const [modal, setModal] = useState({
     show: false,
     action: null, // 'approve' or 'reject'
   });
   const [loading, setLoading] = useState(false);
-console.log(post)
   // Example contract functions
   const approveContribution = async (id) => {
     // Interact with contract here
@@ -39,6 +38,7 @@ console.log(post)
       await tx.wait();
       updateContributionStatus(post?.id, true)
       toast.success("Contribution approved!");
+      getUpdatedContributions();
       navigate("/for-you")
     } catch (error) {
       toast.error(error)
@@ -128,7 +128,7 @@ console.log(post)
             </div>
 
             {/* Approve Button */}
-            {(post?.approved === false && activeAccount?.address.toLowerCase() === "0x097753B3EF40ca0676B8d95f59303AcC5f3f42cF".toLowerCase()) &&
+            {(post?.approved === false && activeAccount?.address.toLowerCase() === "0x9d4eF81F5225107049ba08F69F598D97B31ea644".toLowerCase()) &&
               <button
                 disabled={loading}
                 onClick={() => setModal({ show: true, action: 'approve' })}
@@ -138,7 +138,7 @@ console.log(post)
               </button>
             }
 
-            {(post?.approved === false && activeAccount?.address.toLowerCase() !== "0x097753B3EF40ca0676B8d95f59303AcC5f3f42cF".toLowerCase()) &&
+            {(post?.approved === false && activeAccount?.address.toLowerCase() !== "0x9d4eF81F5225107049ba08F69F598D97B31ea644".toLowerCase()) &&
               <button
                 disabled={true}
                 className="w-fit cursor-not-allowed bg-[#9e74eb] hover:opacity-90 text-white p-2 mt-3 flex justify-center gap-2 items-center rounded-lg"
@@ -254,11 +254,7 @@ console.log(post)
                     </button>
                     <button
                       onClick={handleConfirm}
-                      className={`flex-1 ${
-                        modal.action === 'approve'
-                          ? 'bg-[#9e74eb]'
-                          : 'bg-red-500'
-                      } hover:opacity-90 text-white py-2 rounded`}
+                      className={`flex-1 bg-[#9e74eb] hover:opacity-90 text-white py-2 rounded`}
                     >
                       {loading ? "Processing":"Confirm"}
                     </button>

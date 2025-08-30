@@ -32,7 +32,7 @@ const SideBar = () => {
         <SideBarItem title="For You" lightIcon={Market} darkIcon={MarketDark} link="/for-you" />
         <SideBarItem title="Themes" lightIcon={Setting} darkIcon={Setting} link="/themes" />
         {activeAccount && (
-          <SideBarItem title={activeAccount?.address.toLowerCase() === "0x097753B3EF40ca0676B8d95f59303AcC5f3f42cF".toLowerCase() ? "Collaborations" : "My Collection"} lightIcon={Col} darkIcon={ColDark} link="/collection" />
+          <SideBarItem title={activeAccount?.address.toLowerCase() === "0x9d4eF81F5225107049ba08F69F598D97B31ea644".toLowerCase() ? "Collaborations" : "My Collection"} lightIcon={Col} darkIcon={ColDark} link="/collection" />
         )}
       </div>
       <div className="mt-5 pt-2 px-3">

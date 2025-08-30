@@ -36,8 +36,8 @@ export const plans = [
     }
 ]
 
-export const coinContract = "0x086a89e074934eE178d3Eb4D49B84d03d4B22dee"
-export const contractAddress = "0x086a89e074934eE178d3Eb4D49B84d03d4B22dee"
+export const coinContract = "0x32C9C3c75Cc9Bf5f4D6becd599562ade8158651F"
+export const contractAddress = "0x32C9C3c75Cc9Bf5f4D6becd599562ade8158651F"
 
 export const ipfsToHttp = (ipfsUrl) => ipfsUrl.replace('ipfs://', 'https://ipfs.io/ipfs/');
 

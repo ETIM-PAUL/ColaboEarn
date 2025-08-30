@@ -15,6 +15,7 @@ import { BiSolidHourglassTop } from "react-icons/bi";
 import { MdOutlineFlightTakeoff, MdOutlineFlightLand } from "react-icons/md";
 import { useActiveAccount, useActiveWallet, useActiveWalletChain, useConnectModal, useWalletBalance } from "thirdweb/react";
 import { clientThirdweb } from "../../client";
+import { shortenAddress } from "thirdweb/utils";
 
 const categories = [
   "Adventure", "Sci-Fi", "Fantasy", "Romance", "Mystery", "Horror", "History",
@@ -26,7 +27,7 @@ const steps = [
   {
     number: "01",
     title: "Facilitators Add Theme",
-    description: "Facilitators on CollaboEarn create story themes to guide writers and spark collaborative storytelling.",
+    description: "Facilitators on CollaboEarn create themes to guide content creators and spark collaborative content.",
     icon: <MdOutlineFlightTakeoff className="text-2xl" />
   },
   {
@@ -65,7 +66,7 @@ function LandingPage() {
       setIsRegisterModalOpen(true);
     }
   }
-  const { coinDetails, allUsers } = useContext(PostsContext);
+  const { forYouPosts, allUsers } = useContext(PostsContext);
 
   const getUserName = (address) => {
     const user = allUsers.find((user) => user.userAddress.toLowerCase() === address.toLowerCase());
@@ -94,7 +95,7 @@ function LandingPage() {
               CollaboEarn is a Web3 content creation platform where your imagination turns into collectible and monetizable content (artworks, clips and words) powered by Lisk.
               </p>
               <button onClick={() => account?.address ? navigate('/publish_story') : handleConnect()} className="w-[200px] cursor-pointer text-center bg-[#9e74eb] hover:opacity-90 text-white px-6 py-3 rounded-xl transition duration-300 shadow-md">
-                <span className="text-sm">Start Writing</span>
+                <span className="text-sm">Start Earning</span>
               </button>
             </div>
             <div className="hidden md:block">
@@ -108,14 +109,18 @@ function LandingPage() {
           <div className="mx-auto">
             <h3 className="text-2xl font-medium mb-8 text-center">Explore Popular Themes</h3>
             <div className="flex flex-wrap gap-4">
-              {coinDetails.length > 0 && coinDetails.slice(0, 4).map((story, index) => (
+              {forYouPosts.length > 0 && forYouPosts.slice(0, 4).map((post, index) => (
                 <div key={index} onClick={() => navigate(`/story_details/${story?.address}`)} className="grow max-w-[300px] cursor-pointer">
                   <div className="relative w-full h-64 overflow-hidden rounded-lg shadow-lg">
-                    <img src={story?.mediaContent?.previewImage?.medium} alt="Background" className="absolute inset-0 w-full h-full object-cover" />
+                    <img src={
+                      (post?.type === "artworks" ? post?.content : post.nftImg).startsWith("ipfs://")
+                        ? (post?.nftImg === "" ? post?.content : post.nftImg).replace("ipfs://", "https://ipfs.io/ipfs/")
+                        : post.nftImg
+                    } alt="Background" className="absolute inset-0 w-full h-full object-cover" />
                   </div>
                   <div className="relative mt-2 text-black text-start">
-                    <h2 className="text-md font-semibold">{story?.name}</h2>
-                    <p className="mt-1 text-sm text-gray-600">{getUserName(story?.creatorAddress)}</p>
+                    <h2 className="text-md font-semibold">{post?.title}</h2>
+                    <p className="mt-1 text-sm text-gray-600">{shortenAddress(post?.creator)}</p>
                   </div>
                 </div>
               ))}
@@ -164,7 +169,7 @@ function LandingPage() {
         </section>
 
         {/* Plans Section */}
-        <section id="plans" className="py-20 px-6">
+        <section id="plans" className="py-20 px-6 hidden">
           <div className="max-w-5xl mx-auto text-center">
             <h3 className="text-2xl font-medium mb-10">Choose Your Creator Plan</h3>
             <div className="grid md:grid-cols-2 gap-8">

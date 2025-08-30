@@ -33,7 +33,7 @@ const MyCollection = ({ classType }) => {
     </div>
     )}
 
-  if (activeAccount?.address.toLowerCase() !== "0x097753B3EF40ca0676B8d95f59303AcC5f3f42cF".toLowerCase() && forYouPosts.filter((it) => it.creator === activeAccount?.address).length === 0) {
+  if (activeAccount?.address.toLowerCase() !== "0x9d4eF81F5225107049ba08F69F598D97B31ea644".toLowerCase() && forYouPosts.filter((it) => it.creator === activeAccount?.address).length === 0) {
     return (
       <div>
       <div className="w-full bg-[#f6f2ff]">
@@ -52,7 +52,7 @@ const MyCollection = ({ classType }) => {
         
         <section className="p-3">
             <div className="w-full text-sm flex justify-between">
-              <span className="font-bold text-gray-900">My Uploaded Theme Content (Arts, Posts, Videos)</span>
+              <span className="font-bold text-gray-900">Uploaded Theme Content (Arts, Posts, Videos)</span>
             </div>
 
           {(loading && forYouPosts.length === 0) && (
@@ -71,7 +71,7 @@ const MyCollection = ({ classType }) => {
             {(forYouPosts.length > 0 && !loading) && (
             // Show filtered coin details
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-3">
-              {(activeAccount?.address.toLowerCase() !== "0x097753B3EF40ca0676B8d95f59303AcC5f3f42cF".toLowerCase() ? forYouPosts.filter((it) => it.creator === activeAccount?.address) : forYouPosts).map((post, index) => (
+              {(activeAccount?.address.toLowerCase() !== "0x9d4eF81F5225107049ba08F69F598D97B31ea644".toLowerCase() ? forYouPosts.filter((it) => it.creator === activeAccount?.address) : forYouPosts).map((post, index) => (
                 <NftCard
                 key={index}
                 id={post?.id}

@@ -30,9 +30,9 @@ Contributions (words, artworks, clips) are all stored on IPFS, this helps to red
 ## Powered By
 
 - **Smart Contract**  
-  - [`Collabo.sol`](./contracts/Collabo.sol) deployed and verified on the **Etherlink Testnet** The fast, fair and (nearly) free L2.
+  - [`Collabo.sol`](./contracts/Collabo.sol) deployed and verified on the **Lisk Sepolia Testnet** The fast, fair and (nearly) free L2.
 
-  (https://testnet.explorer.etherlink.com/address/0xF77025Db69882AD1c7f18D2A1C5B8821C091916C)
+  (https://sepolia-blockscout.lisk.com/address/0x32C9C3c75Cc9Bf5f4D6becd599562ade8158651F)
 
   - Handles theme creation, contributions, approval, tipping, and revenue sharing
 
@@ -47,8 +47,8 @@ Contributions (words, artworks, clips) are all stored on IPFS, this helps to red
 ### 1. Clone the project
 
 ```bash
-git clone https://github.com/your-org/CollaboEarn.git
-cd CollaboEarn
+git clone https://github.com/ETIM-PAUL/ColaboEarn.git
+cd ColaboEarn
 ```
 
 ### 2. Install dependencies
@@ -67,9 +67,9 @@ yarn dev
 npm run dev
 ```
 
-### 4. Connect to Etherlink Testnet
+### 4. Connect to Lisk Sepolia Testnet
 
-Ensure your wallet is connected to **Etherlink Testnet** and you have test ETH.  
+Ensure your wallet is connected to **Lisk Sepolia Testnet** and you have test ETH.  
 Use [Thirdweb Connect Wallet](https://portal.thirdweb.com/react/react.connectwallet) integration.
 
 ---
@@ -79,7 +79,7 @@ Use [Thirdweb Connect Wallet](https://portal.thirdweb.com/react/react.connectwal
 - `createTheme(...)` Admin-only: Creates a new theme
 - `submitContribution(...)` Community members submit content
 - `approveContribution(...)` Admin approves/rejects a submission
-- `tipTheme(themeId)` Send XTZ tips to a theme; contract auto-splits among contributors
+- `tipTheme(themeId)` Send ETH tips to a theme collaboration; contract auto-splits among contributors
 
 Tip: Contributions are stored via IPFS and referenced in the smart contract.
 
@@ -87,9 +87,8 @@ Tip: Contributions are stored via IPFS and referenced in the smart contract.
 
 ## Testnet Info
 
-- **Chain:** Etherlink Testnet  
-- **Block Explorer:** [explorer-testnet.etherlink.com](https://explorer-testnet.etherlink.com)  
-- **Faucet:** [testnet-faucet.etherlink.com](https://testnet-faucet.etherlink.com)
+- **Chain:** Lisk Sepolia Testnet  
+- **Block Explorer:** [https://sepolia-blockscout.lisk.com/]
 
 ---
 
