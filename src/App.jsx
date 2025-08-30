@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import LandingPage from './pages/landing.jsx'
-import DashboardPage from './pages/Dashboard.jsx'
+import DashboardPage from './pages/dashboard.jsx'
 import Register from './pages/Register.jsx'
 import Collection from './pages/collection.jsx'
 import ForYou from './pages/foryou.jsx'

@@ -26,18 +26,18 @@ export const groupCoinsByCreator = (coins) => {
 export const plans = [
     {
         title: 'Basic',
-        price: '0.0001ETH/month',
+        price: '0.0001ETH',
         features: ['Post Banner and Text Editor', '20 posts/month', '5000 words/post']
     },
     {
         title: 'Premium',
-        price: '0.00015ETH/month',
+        price: '0.00015ETH',
         features: ['Post Banner, Text Editor, and AI Assistant', 'Unlimited Posts', 'Unlimited words/post']
     }
 ]
 
-export const coinContract = "0x1CB7160E2Ed02aAFe8Ee98160460BFf4D2caBB31"
-export const contractAddress = "0xF77025Db69882AD1c7f18D2A1C5B8821C091916C"
+export const coinContract = "0x086a89e074934eE178d3Eb4D49B84d03d4B22dee"
+export const contractAddress = "0x086a89e074934eE178d3Eb4D49B84d03d4B22dee"
 
 export const ipfsToHttp = (ipfsUrl) => ipfsUrl.replace('ipfs://', 'https://ipfs.io/ipfs/');
 
