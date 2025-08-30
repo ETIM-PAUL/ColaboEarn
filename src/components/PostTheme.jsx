@@ -10,7 +10,7 @@ import { GiArtificialIntelligence } from "react-icons/gi";
 import axios from "axios";
 import { base, baseSepolia } from "viem/chains";
 import { useNavigate } from "react-router-dom";
-import { abi, coinContract, contractAddress } from "./utils";
+import { abi, contractAddress } from "./utils";
 import { PostsContext } from "../context/PostsContext";
 import { ethers } from "ethers";
 import { useActiveAccount } from "thirdweb/react";

@@ -7,7 +7,7 @@ import { useDisconnect, useActiveWallet } from "thirdweb/react";
 import { useConnectModal } from "thirdweb/react";
 import { clientThirdweb } from '../../client';
 import { useActiveWalletChain } from "thirdweb/react";
-import { etherlinkTestnet } from 'viem/chains';
+import { liskSepolia } from 'viem/chains';
 import { ethers } from 'ethers';
 
 const MyWallet = () => {
@@ -32,7 +32,7 @@ const MyWallet = () => {
   }
 
   async function handleConnect() {
-    const wallet = await connect({ clientThirdweb, chain: etherlinkTestnet, theme:"dark", title: "CollaboEarn - Connect, Collaborate and start earning" });
+    const wallet = await connect({ clientThirdweb, chain: liskSepolia, theme:"dark", title: "CollaboEarn - Connect, Collaborate and start earning" });
   }
 
   const formatAddress = (addr) => {

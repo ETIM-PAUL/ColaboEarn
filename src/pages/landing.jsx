@@ -91,7 +91,7 @@ function LandingPage() {
                 Share Content. Earn Tokens. Inspire the World.
               </h2>
               <p className="text-gray-600 text-lg whitespace-pre-line break-words text-start">
-              CollaboEarn is a Web3 storytelling platform where your imagination turns into collectible and monetizable content (artworks, clips and words) powered by Etherlink.
+              CollaboEarn is a Web3 content creation platform where your imagination turns into collectible and monetizable content (artworks, clips and words) powered by Lisk.
               </p>
               <button onClick={() => account?.address ? navigate('/publish_story') : handleConnect()} className="w-[200px] cursor-pointer text-center bg-[#9e74eb] hover:opacity-90 text-white px-6 py-3 rounded-xl transition duration-300 shadow-md">
                 <span className="text-sm">Start Writing</span>
@@ -164,7 +164,7 @@ function LandingPage() {
         </section>
 
         {/* Plans Section */}
-        <section id="plans" className="py-20 hidden px-6">
+        <section id="plans" className="py-20 px-6">
           <div className="max-w-5xl mx-auto text-center">
             <h3 className="text-2xl font-medium mb-10">Choose Your Creator Plan</h3>
             <div className="grid md:grid-cols-2 gap-8">
@@ -189,7 +189,7 @@ function LandingPage() {
         </div>
 
         <footer className="py-10 text-center text-gray-500">
-          &copy; 2025 CollaboEarn. All rights reserved. Powered by Etherlink Chain
+          &copy; 2025 CollaboEarn. All rights reserved. Powered by Lisk Chain
         </footer>
 
         <RegisterModal 
