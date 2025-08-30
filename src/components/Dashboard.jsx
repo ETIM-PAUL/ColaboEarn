@@ -19,11 +19,19 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { forYouPosts, themes } = useContext(PostsContext);
 
+  console.log("posts",forYouPosts )
   const totalTips = themes.reduce((sum, theme) => {
     // Convert each tip to a number (handles string, BigNumber, etc.)
     const tipValue = Number(theme.amount);
     return sum + (isNaN(tipValue) ? 0 : tipValue);
   }, 0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, [])
+  
 
   const dashboad = [
     { title: "Total Words Content", value: forYouPosts.filter((item) => item?.type === "words")?.length ?? 0, positive:"false", change:"8.3", icon:<FaPen className="text-white-400 text-2xl" />},
